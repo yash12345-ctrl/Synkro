@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Video Chat | Synkro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f4f8;
+            color: #1f1c2c;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        
+        header {
+            background: linear-gradient(90deg, #1f1c2c, #928dab);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: white;
+            padding: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo span {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+
+
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .overlay.show {
+            transform: translateY(0);
+        }
+
+        .overlay ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        .overlay ul li {
+            margin: 20px 0;
+        }
+
+        .overlay ul li a {
+            font-size: 2rem;
+            color: #1f1c2c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        
+        .container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .date-section,
+        .time-section,
+        .summary-section {
+            flex: 1 1 300px;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .dates,
+        .times {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .date-btn,
+        .time-slot {
+            padding: 10px 16px;
+            border: 1px solid #928dab;
+            border-radius: 10px;
+            background: #fff;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .date-btn:hover,
+        .time-slot:hover,
+        .date-btn.active,
+        .time-slot.active {
+            background: #928dab;
+            color: white;
+        }
+
+        .time-section,
+        .summary-section {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .time-section.show,
+        .summary-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .summary-box {
+            background: #f7f7fa;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 20px;
+            }
+        }
+
+        
+        footer {
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-top: 100px;
+        }
+
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 20px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            flex: 1 1 300px;
+        }
+
+        .footer-logo {
+            width: 50px;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+            flex: 2 1 600px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links div h4 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        .footer-links ul li a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: #ffb3ec;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .footer-bottom .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-bottom .social-icons a img {
+            width: 28px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-bottom .social-icons a:hover img {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .footer-top {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .footer-links div {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        .desktop-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .desktop-nav ul li a {
+            color: white;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .desktop-nav ul li a:hover {
+            color: #ffb3ec;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    
+    <header>
+        <div class="logo">
+            <img src="images/gggg.jpg" class="logo-img" alt="Synkro Logo" />
+            <span>Synkro</span>
+        </div>
+
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="about.html">Home</a></li>
+                <li><a href="solution.html">Solutions</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="customer1.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+
+    </header>
+    
+    <div class="overlay" id="overlayMenu">
+        <ul>
+            <li><a href="about.html" onclick="toggleMenu()">Home</a></li>
+            <li><a href="solution.html" onclick="toggleMenu()">Solutions</a></li>
+            <li><a href="team.html" onclick="toggleMenu()">Team</a></li>
+            <li><a href="customer1.html" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+
+
+    
+    <section style="text-align: center; padding: 40px 20px;">
+        <h1 style="font-size: 2.2rem; color: #1f1c2c;">Book Your Video Chat with Synkro</h1>
+        <p style="max-width: 700px; margin: 15px auto 0; font-size: 1.05rem; color: #555;">
+            Let’s connect and explore tailored digital solutions for your business. Schedule a video call at your
+            convenience.
+        </p>
+    </section>
+
+    <div class="container">
+        <div class="date-section">
+            <h2 class="section-title">Select a Date</h2>
+            <p style="margin-bottom: 10px; color: #555;">Choose a convenient date for your personalized video
+                consultation.</p>
+
+            <div class="dates" id="dateContainer"></div>
+        </div>
+        <div class="time-section" id="timeSection">
+            <h2 class="section-title">Select Time</h2>
+            <p style="margin-bottom: 10px; color: #555;">Pick a time slot that works best for your schedule.</p>
+
+            <div class="times" id="timeContainer"></div>
+        </div>
+        <div class="summary-section" id="summarySection">
+            <h2 class="section-title">Your Selection</h2>
+            <p style="margin-bottom: 10px; color: #555;">Please review your selected date and time before confirming
+                your appointment.</p>
+
+            <div class="summary-box" id="summaryBox">
+                <p><strong>Date:</strong> <span id="selectedDate">Not selected</span></p>
+                <p><strong>Time:</strong> <span id="selectedTime">Not selected</span></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <form id="finalForm" action="/save-appointment" method="POST">
+            <input type="hidden" name="selectedDate" id="hiddenDate">
+            <input type="hidden" name="selectedTime" id="hiddenTime">
+            <button type="button" onclick="confirmAppointment()"
+                style="padding: 12px 25px; font-size: 1rem; background: #1f1c2c; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                Confirm Appointment
+            </button>
+        </form>
+    </div>
+
+
+
+
+    </div>
+
+
+
+    
+    <footer class="footer-section">
+        <div class="footer-wrapper">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="images/gggg.jpg" alt="Synkro Logo" class="footer-logo" />
+                    <p>Synkro is a future-focused digital studio transforming bold ideas into impactful digital
+                        solutions.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Solutions</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Mobile Apps</a></li>
+                            <li><a href="#">UI/UX Design</a></li>
+                            <li><a href="#">Software Solutions</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Contact</h4>
+                        <ul>
+                            <li>Email: <a href="mailto:hello@technova.in">yashtoma12345y</a></li>
+                            <li>Phone: +91 8375007604</li>
+                            <li>Chennai, India</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="#"><img src="https://img.icons8.com/fluency/48/linkedin.png" alt="LinkedIn" /></a>
+                    <a href="#"><img src="https://img.icons8.com/fluency/48/github.png" alt="GitHub" /></a>
+                    <a href="#"><img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram" /></a>
+                    <a href="#"><img src="https://img.icons8.com/fluency/48/twitter.png" alt="Twitter" /></a>
+                </div>
+                <p>© 2025 Synkro. Crafted with passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+
+            document.getElementById('overlayMenu').classList.toggle('show');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const now = new Date();
+            const dateContainer = document.getElementById("dateContainer");
+            const timeSection = document.getElementById("timeSection");
+            const timeContainer = document.getElementById("timeContainer");
+            const summarySection = document.getElementById("summarySection");
+
+            let selectedDateLabel = "";
+            let selectedTimeLabel = "";
+            let selectedDateISO = "";
+
+            const generateDates = () => {
+                for (let i = 0; i < 7; i++) {
+                    const futureDate = new Date();
+                    futureDate.setDate(now.getDate() + i);
+
+                    const label = i === 0 ? "Today" : futureDate.toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                    });
+
+                    const btn = document.createElement("button");
+                    btn.className = "date-btn";
+                    btn.textContent = label;
+                    btn.dataset.date = futureDate.toISOString().split("T")[0];
+
+                    btn.onclick = () => handleDateSelection(btn, futureDate, i === 0, label);
+                    dateContainer.appendChild(btn);
+                }
+            };
+
+            const handleDateSelection = (btn, dateObj, isToday, label) => {
+                document.querySelectorAll(".date-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                selectedDateLabel = label;
+                document.getElementById("selectedDate").textContent = selectedDateLabel;
+
+                if (isToday) {
+                    selectedDateISO = new Date().toISOString().split("T")[0];
+                } else {
+                    selectedDateISO = dateObj.toISOString().split("T")[0];
+                }
+
+                showAvailableTimeSlots(dateObj, isToday);
+            };
+
+            const showAvailableTimeSlots = (dateObj, isToday) => {
+                timeContainer.innerHTML = "";
+                summarySection.classList.remove("show");
+                selectedTimeLabel = "";
+                document.getElementById("selectedTime").textContent = "Not selected";
+
+                let startHour = isToday ? now.getHours() + 2 : 9;
+                if (startHour < 9) startHour = 9;
+                if (startHour > 21) {
+                    timeContainer.innerHTML = "<p>No slots available for today.</p>";
+                    timeSection.classList.add("show");
+                    return;
+                }
+
+                for (let hour = startHour; hour <= 21; hour++) {
+                    const ampm = hour >= 12 ? "PM" : "AM";
+                    const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+                    const timeLabel = `${formattedHour}:00 ${ampm}`;
+
+                    const slot = document.createElement("div");
+                    slot.className = "time-slot";
+                    slot.textContent = timeLabel;
+                    slot.onclick = () => handleTimeSelection(slot, timeLabel);
+
+                    timeContainer.appendChild(slot);
+                }
+
+                timeSection.classList.add("show");
+            };
+
+            const handleTimeSelection = (slotElement, timeText) => {
+                document.querySelectorAll(".time-slot").forEach(slot => slot.classList.remove("active"));
+                slotElement.classList.add("active");
+
+                selectedTimeLabel = timeText;
+                document.getElementById("selectedTime").textContent = selectedTimeLabel;
+                summarySection.classList.add("show");
+
+                
+                document.getElementById("hiddenDate").value = selectedDateISO;
+                document.getElementById("hiddenTime").value = selectedTimeLabel;
+
+                
+                summarySection.scrollIntoView({ behavior: "smooth" });
+            };
+
+            window.confirmAppointment = () => {
+                if (!selectedDateISO || !selectedTimeLabel) {
+                    alert("⚠️ Please select both a date and a time before confirming.");
+                    return;
+                }
+
+                document.getElementById("finalForm").submit();
+            };
+
+            generateDates();
+        });
+    </script>
+
+
+</body>
+
+</html>

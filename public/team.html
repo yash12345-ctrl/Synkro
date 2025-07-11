@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Team | Synkro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f9f9f9;
+            color: #1f1f1f;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #1f1c2c, #928dab);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: white;
+            padding: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo span {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffb3ec;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                flex-direction: column;
+                background: #1f1c2c;
+                padding: 20px;
+                border-radius: 10px;
+                display: none;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo span {
+                font-size: 1.2rem;
+            }
+        }
+
+        
+        main {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: #1f1c2c;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .team-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .team-card h4 {
+            margin: 10px 0 5px;
+            color: #1f1c2c;
+            font-size: 1.2rem;
+        }
+
+        .team-card span {
+            font-size: 0.95rem;
+            color: #888;
+        }
+
+        .team-card p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        
+        .footer-section {
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-top: 100px;
+        }
+
+        .footer-columns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 60px;
+            gap: 40px;
+        }
+
+        .footer-columns div {
+            min-width: 200px;
+        }
+
+        .footer-btn {
+            display: inline-block;
+            background: #ff4ecd;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-columns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-columns div {
+                text-align: center;
+            }
+        }
+
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 20px;
+            color: #fff;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            flex: 1 1 300px;
+        }
+
+        .footer-logo {
+            width: 50px;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+            flex: 2 1 600px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links div h4 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        .footer-links ul li a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: #ffb3ec;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .footer-bottom .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-bottom .social-icons a img {
+            width: 28px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-bottom .social-icons a:hover img {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .footer-top {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .footer-links div {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .overlay.show {
+            transform: translateY(0);
+        }
+
+        .overlay ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        .overlay ul li {
+            margin: 20px 0;
+        }
+
+        .overlay ul li a {
+            font-size: 2rem;
+            color: #1f1c2c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .team-card {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .team-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    
+    <header>
+        <div class="logo">
+            <img src="images/gggg.jpg" class="logo-img" alt="Synkro Logo" />
+            <span>Synkro</span>
+        </div>
+        <nav>
+            <ul id="navLinks">
+                <li><a href="about.html">Home</a></li>
+                <li><a href="solution.html">Solutions</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="customer1.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div id="overlayMenu" class="overlay">
+        <ul>
+            <li><a href="about.html">Home</a></li>
+            <li><a href="solution.html">Solutions</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="customer1.html">Contact</a></li>
+        </ul>
+    </div>
+
+
+    
+    <main>
+        <div class="section-title">
+            <h2>Meet Our Core Team</h2>
+            <p>Innovators, developers, and designers working together to shape the future of digital experiences.</p>
+        </div>
+
+        <div class="team-grid">
+            
+            <div class="team-card">
+                <img src="images/heyy.jpg" alt="Khushi Shishodia" />
+                <h4>Khushi Shishodia</h4>
+                <span>Growth & Strategy Lead | Founding Team @ SYNKRO</span>
+                <p>Khushi is our in-house multitasking wizard — talking to clients, chasing leads, running ops, writing
+                    scroll-stopping content, and somehow still making time to fix that one font that’s “just not
+                    vibing.”<br><br>
+                    She’s the brain behind the business side of SYNKRO, turning chaos into clarity and ideas into
+                    action. Basically, if it needs to grow, glow, or get done — Khushi’s already on it.</p>
+            </div>
+
+            
+            <div class="team-card">
+                <img src="images/ishu.jpg" alt="Devansh" />
+                <h4>Devansh Shishodia</h4>
+                <span>Tech Backbone | Security & Systems Lead @ SYNKRO</span>
+                <p>Devansh is SYNKRO’s quiet force — managing cybersecurity, system maintenance, and all the tech stuff
+                    that keeps us running smooth and safe.<br><br>
+                    If SYNKRO were a spaceship, Devansh would be in the control room, calm as ever, making sure we stay
+                    on course.</p>
+            </div>
+
+            
+            <div class="team-card">
+                <img src="images/dddddd.jpg" alt="Yash" />
+                <h4>Yash Tomar</h4>
+                <span>Design & Development Maestro | Web Wizard @ SYNKRO</span>
+                <p>Yash is the creative coder behind everything you see (and don’t see) on our platforms. From sleek UI
+                    designs to functional web magic, he turns wild ideas into pixel-perfect realities.<br><br>
+                    He codes, he designs, he builds — and somehow makes it all look effortless. If SYNKRO had a visual
+                    soul, Yash would be the one sketching it and bringing it to life, one smooth interaction at a time.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    
+    <footer class="footer-section">
+        <div class="footer-wrapper">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="images/gggg.jpg" alt="Synkro Logo" class="footer-logo" />
+                    <p>Synkro is a future-focused digital studio transforming bold ideas into impactful digital
+                        solutions.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Solutions</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Mobile Apps</a></li>
+                            <li><a href="#">UI/UX Design</a></li>
+                            <li><a href="#">Software Solutions</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Contact</h4>
+                        <ul>
+                            <li>Email: <a href="mailto:hello@technova.in">yashtoma12345y@gmail.com</a></li>
+                            <li>Phone: +91 8375007604</li>
+                            <li>Chennai, India</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="#"><img src="https://img.icons8.com/fluency/48/linkedin.png" alt="LinkedIn" /></a>
+                    <a href="#"><img src="https://img.icons8.com/fluency/48/github.png" alt="GitHub" /></a>
+                    <a href="#"><img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram" /></a>
+                    <a href="#"><img src="https://img.icons8.com/fluency/48/twitter.png" alt="Twitter" /></a>
+                </div>
+                <p class="copyright">© 2025 Synkro. Crafted with passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                } else {
+                    entry.target.classList.remove("visible");
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const flyElements = document.querySelectorAll(".experience-card, .fly-element,.team-card");
+
+        flyElements.forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.05}s`;
+            observer.observe(el);
+        });
+
+        function toggleMenu() {
+            document.getElementById('overlayMenu').classList.toggle('show');
+        }
+    </script>
+
+</body>
+
+</html>

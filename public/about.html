@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | TechNova</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f9f9f9;
+            color: #1f1f1f;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(90deg, #1f1c2c, #928dab);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: white;
+            padding: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo span {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffb3ec;
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .about-content,
+        .experience-cards,
+        .services-grid,
+        .trust-grid,
+        .footer-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .about-text,
+        .about-img,
+        .experience-card,
+        .service-card,
+        .trust-card {
+            flex: 1 1 300px;
+        }
+
+        .about-img img,
+        .service-card img,
+        .trust-card img,
+        .review-card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .experience-card,
+        .service-card,
+        .trust-card {
+            padding: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .highlight {
+            background: #ffe9fb;
+            padding: 10px;
+            border-left: 5px solid #ff4ecd;
+            margin: 20px 0;
+        }
+
+        .footer-section {
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .footer-columns div {
+            min-width: 200px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                flex-direction: column;
+                background: #1f1c2c;
+                padding: 20px;
+                border-radius: 10px;
+                display: none;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo span {
+                font-size: 1.2rem;
+            }
+        }
+
+        .fly-element {
+            opacity: 0;
+            transform: translateY(50px) translateX(-30px) rotate(-2deg);
+            transition: all 0.6s ease;
+        }
+
+        .fly-element.visible {
+            opacity: 1;
+            transform: translateY(0) translateX(0) rotate(0deg);
+        }
+
+        .trust-section {
+            background: #f8f8ff;
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: #1f1c2c;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        .section-title p {
+            color: #555;
+            font-size: 1.1rem;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+        }
+
+        .about-img img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInZoom 1.8s ease forwards;
+        }
+
+        .experience-section {
+            background: #fff;
+            padding: 80px 20px;
+        }
+
+        .experience-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .experience-card {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            padding: 30px 25px;
+            border-radius: 20px;
+            flex: 1 1 300px;
+            max-width: 340px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .experience-card h4 {
+            font-size: 1.3rem;
+            color: #1f1c2c;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .experience-card p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .experience-section {
+                padding: 60px 15px;
+            }
+
+            .experience-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .experience-card {
+                max-width: 90%;
+                padding: 25px 20px;
+            }
+
+            .experience-card h4 {
+                font-size: 1.1rem;
+            }
+
+            .experience-card p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .experience-section {
+                padding: 50px 10px;
+            }
+
+            .experience-card {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+
+            .experience-card h4 {
+                font-size: 1rem;
+            }
+
+            .experience-card p {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-columns {
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center;
+            }
+
+            .footer-columns>div {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .overlay.show {
+            transform: translateY(0);
+        }
+
+        .overlay ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        .overlay ul li {
+            margin: 20px 0;
+        }
+
+        .overlay ul li a {
+            font-size: 2rem;
+            color: #1f1c2c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="images/gggg.jpg" class="logo-img" alt="Synkro Logo">
+            <span>Synkro</span>
+        </div>
+        <nav>
+            <ul id="navLinks">
+                <li><a href="about.html">Home</a></li>
+                <li><a href="solution.html">Solutions</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="customer1.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div id="overlayMenu" class="overlay">
+        <ul>
+            <li><a href="about.html">Home</a></li>
+            <li><a href="solution.html">Solutions</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="customer1.html">Contact</a></li>
+        </ul>
+    </div>
+
+
+    <section>
+        <div class="section-title fly-element">
+            <h2>About Our Startup</h2>
+            <p>Driven by Innovation. Powered by Passion.</p>
+        </div>
+
+        <div class="about-content">
+            <div class="about-text fly-element">
+                <h3>Our Journey</h3>
+                <p>At SYNKRO, we believe that every mind is a powerhouse of ideas — waiting to take shape, solve
+                    problems, and drive change. But ideas alone are not enough; what truly matters is turning those
+                    ideas into reality. That’s where we come in.
+                    Our mission is simple yet powerful: to bring your ideas into sync with the digital world. We help
+                    individuals, startups, and businesses transform raw thoughts into functional, impactful, and
+                    scalable digital solutions.
+
+                </p>
+
+                <div class="highlight fly-element">
+                    We believe in building products that are not only beautiful but also meaningful.
+                </div>
+
+                <p>
+                    From design to deployment, we focus on building scalable, secure, and user-friendly software.
+                    Whether you're launching a new app, a portfolio, or a full platform — TechNova has you covered.
+                </p>
+            </div>
+
+            <div class="about-img fly-element">
+                <img src="images/image 1.webp" alt="Startup Team">
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="experience-section">
+        <div class="section-title fly-element">
+            <h2>Team Members' Experience</h2>
+            <p>Real stories from those who built it with us.</p>
+        </div>
+
+        <div class="experience-cards">
+            <div class="card experience-card fly-element">
+                <h4>Yash Tomar</h4>
+                <p>
+                    Working with TechNova was a transformative experience. I honed my full-stack skills and contributed
+                    to several live products. The culture is very collaborative and inspiring.
+                </p>
+            </div>
+            <div class="card experience-card fly-element">
+                <h4>Devansh Shishodia</h4>
+                <p>
+                    As a UI/UX designer, I had the opportunity to bring ideas to life. The team pushed me creatively
+                    while respecting my vision — that balance helped me grow fast.
+                </p>
+            </div>
+            <div class="card experience-card fly-element">
+                <h4>Khushi Shishodia</h4>
+                <p>
+                    I managed client interactions and product delivery. It was hands-on, fast-paced, and exactly the
+                    kind of experience I needed to grow into a professional project lead.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="what-we-do-section">
+        <div class="section-title fly-element">
+            <h2>What We Do</h2>
+            <p>Turning your ideas into real-world digital solutions</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card fly-element">
+                <img src="images/website-development-links-seo-webinar-cyberspace-concept_53876-120953.avif"
+                    alt="Web Development">
+                <h4>Website Development</h4>
+                <p>Custom websites with stunning designs and smooth performance, tailored to your brand.</p>
+            </div>
+
+            <div class="service-card fly-element">
+                <img src="images/mobile-application-development-lifecycle-5-key-phases.jpg" alt="App Development">
+                <h4>Mobile App Development</h4>
+                <p>High-quality Android & iOS apps built for performance and user experience.</p>
+            </div>
+
+            <div class="service-card fly-element">
+                <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=800&q=80"
+                    alt="UI/UX Design">
+                <h4>UI/UX Design</h4>
+                <p>Modern, engaging, and intuitive user interfaces that enhance user satisfaction.</p>
+            </div>
+
+            <div class="service-card fly-element">
+                <img src="images/images.jpeg" alt="Software Development">
+                <h4>Software Development</h4>
+                <p>Robust desktop and backend systems tailored to your organizational needs.</p>
+            </div>
+
+            <div class="service-card fly-element">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80"
+                    alt="MVP Development">
+                <h4>MVP Development</h4>
+                <p>Build and test Minimum Viable Products quickly to validate your business ideas.</p>
+            </div>
+
+            <div class="service-card fly-element">
+                <img src="images/Top-10-Career-Opportunities-in-Fashion-Designing.jpg" alt="Designing">
+                <h4>Designing</h4>
+                <p>Creative visual designs, branding assets, and graphics to make your brand stand out.</p>
+            </div>
+        </div>
+
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="customer1.html" style="
+      background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+      color: #fff;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    ">
+                Get Free Consult →
+            </a>
+        </div>
+    </section>
+
+
+    <section class="reviews-section">
+        <div class="section-title fly-element">
+            <h2>What Our Partners Say</h2>
+            <p>Feedback from those who've worked with us</p>
+        </div>
+
+        <div class="reviews-grid">
+            <div class="review-card fly-element">
+                <img src="images/4042171.png" alt="John" class="avatar" />
+                <h4>Saksham</h4>
+                <span class="designation">Software Development Head</span>
+                <p>
+                    Synkro's dedication to quality and innovation is unmatched. They delivered our platform ahead of
+                    schedule
+                    and beyond expectations.
+                </p>
+            </div>
+
+            <div class="review-card fly-element">
+                <img src="images/4042171.png" alt="Priya" class="avatar" />
+                <h4>Yash</h4>
+                <span class="designation">UI/UX Development Head</span>
+                <p>
+                    Their UI/UX team has a keen sense of modern design. The collaboration felt natural and results were
+                    visually
+                    stunning.
+                </p>
+            </div>
+
+            <div class="review-card fly-element">
+                <img src="images/4042171.png" alt="Aditya" class="avatar" />
+                <h4>Rahul</h4>
+                <span class="designation"></span>
+                <p>
+                    Synkro brings a startup-friendly mindset while maintaining enterprise-grade execution. They're our
+                    go-to dev
+                    partner now.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="trust-section">
+        <div class="section-title fly-element">
+            <h2>Why Trust Synkro?</h2>
+            <p>Built on values, proven by results</p>
+        </div>
+
+        <div class="trust-grid">
+            <div class="trust-card fly-element">
+                <img src="https://img.icons8.com/fluency/48/shield.png" alt="Secure">
+                <h4>Top-Notch Security</h4>
+                <p>Your data and projects are protected with enterprise-grade encryption and protocols.</p>
+            </div>
+            <div class="trust-card fly-element">
+                <img src="https://img.icons8.com/fluency/48/customer-support.png" alt="Support">
+                <h4>24/7 Support</h4>
+                <p>We’re always available — day or night — to support your vision and needs.</p>
+            </div>
+            <div class="trust-card fly-element">
+                <img src="https://img.icons8.com/fluency/48/checked--v1.png" alt="Quality">
+                <h4>Uncompromised Quality</h4>
+                <p>We combine aesthetics and performance to deliver flawless products that stand out.</p>
+            </div>
+            <div class="trust-card fly-element">
+                <img src="https://img.icons8.com/fluency/48/handshake.png" alt="Clients">
+                <h4>Trusted by 20+ Clients</h4>
+                <p>We’ve worked with startups, enterprises, and creators across the globe.</p>
+            </div>
+            <div class="trust-card fly-element">
+                <img src="https://img.icons8.com/fluency/48/laptop-coding.png" alt="Experience">
+                <h4>Experienced Team</h4>
+                <p>Our developers, designers, and strategists bring years of industry expertise.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="footer-section">
+        <div class="footer-wave"></div>
+        <div class="footer-container">
+            <h2>Let's build the future, together.</h2>
+            <p>Got an idea or need help with a project? We’d love to collaborate with you.</p>
+            <a class="footer-btn"> in Touch</a>
+
+            <div class="footer-columns"
+                style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 60px; gap: 40px;">
+                <div style="flex: 1; min-width: 220px;">
+                    <h4 style="color: #fff; margin-bottom: 15px;">About</h4>
+                    <p style="color: #ccc; line-height: 1.7;">
+                        Synkro is a forward-thinking digital studio crafting exceptional digital products that help
+                        companies
+                        grow, evolve, and transform.
+                    </p>
+                </div>
+
+                <div style="flex: 1; min-width: 160px;">
+                    <h4 style="color: #fff; margin-bottom: 15px;">Explore</h4>
+                    <p>Home</p>
+                    <p>Solutions</p>
+
+                    <p>Team</p>
+
+                    <p>Careers</p>
+                </div>
+
+                <div style="flex: 1; min-width: 160px;">
+                    <h4 style="color: #fff; margin-bottom: 15px;">Services</h4>
+                    <p>Web Development</p>
+                    <p>Mobile Apps</p>
+                    <p>UI/UX Design</p>
+                    <p>Software Solutions</p>
+                </div>
+
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: #fff; margin-bottom: 15px;">Contact</h4>
+                    <p>Email: yashtoma12345y</p>
+                    <p>Phone: +91 8375007604</p>
+                    <p>Chennai, India</p>
+                </div>
+            </div>
+
+            <div class="social-icons" style="margin-top: 40px;">
+                <a href="#"><img src="https://img.icons8.com/fluency/48/linkedin.png" alt="LinkedIn" /></a>
+                <a href="#"><img src="https://img.icons8.com/fluency/48/github.png" alt="GitHub" /></a>
+                <a href="#"><img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram" /></a>
+                <a href="#"><img src="https://img.icons8.com/fluency/48/twitter.png" alt="Twitter" /></a>
+            </div>
+
+            <hr style="margin: 50px auto 20px; width: 80%; border-color: rgba(255, 255, 255, 0.2);" />
+            <p class="copyright">© 2025 Synkro. All rights reserved.</p>
+        </div>
+    </section>
+
+
+
+
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                } else {
+                    entry.target.classList.remove("visible");
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const flyElements = document.querySelectorAll(".experience-card, .fly-element");
+
+        flyElements.forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.05}s`;
+            observer.observe(el);
+        });
+
+        function toggleMenu() {
+            document.getElementById('overlayMenu').classList.toggle('show');
+        }
+    </script>
+
+
+</body>
+
+</html>

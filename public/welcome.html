@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Synkro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body,
+        html {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #1f1c2c, #928dab);
+            color: white;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            z-index: 999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #ff4ecd;
+            left: 0;
+            bottom: -5px;
+            transition: 0.4s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff4ecd;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle,
+        .close-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close-toggle {
+            font-size: 2rem;
+            color: black;
+            position: fixed;
+            top: 25px;
+            right: 30px;
+            display: none;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .startup-name {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-top: 60px;
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin: 20px 0 30px;
+            max-width: 700px;
+        }
+
+        .enter-btn {
+            padding: 12px 30px;
+            background: white;
+            color: #1f1c2c;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 0 10px #fff;
+        }
+
+        .enter-btn:hover {
+            background: #ff4ecd;
+            color: white;
+            box-shadow: 0 0 20px #ff4ecd;
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 30px;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            border-radius: 15px;
+            width: 250px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: white;
+                z-index: 1000;
+                animation: slideDown 0.4s ease forwards;
+            }
+
+            nav ul li {
+                margin-bottom: 30px;
+            }
+
+            nav ul li a {
+                font-size: 2rem;
+                font-weight: bold;
+                color: #111;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul.show~.close-toggle {
+                display: block;
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: white;
+            padding: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo span {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        @keyframes flyInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fly-in {
+            opacity: 0;
+            animation: flyInUp 0.8s ease forwards;
+        }
+
+        .fly-in.delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .fly-in.delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .fly-in.delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .fly-in.delay-4 {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes flyInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fly-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fly-in.visible {
+            animation: flyInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <nav>
+        <div class="logo">
+            <img src="images/gggg.jpg" class="logo-img" alt="Synkro Logo">
+            <span>Synkro</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <div class="close-toggle" onclick="toggleMenu()">✖</div>
+
+        <ul id="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="customer1.html">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <header>
+        <h1 class="startup-name fly-in ">🚀 SYNKRO</h1>
+        <p class="tagline fly-in delay-2">Innovating the Future, One Line of Code at a Time.</p>
+        <a href="about.html" class="enter-btn fly-in delay-3">Enter Site</a>
+    </header>
+
+    
+    <section id="about">
+        <h2 class="section-title fly-in ">About Synkro</h2>
+        <p class="about-text fly-in delay-2">
+            TechNova is a cutting-edge startup focused on delivering next-generation software solutions...
+        </p>
+    </section>
+
+    
+    <section id="features">
+        <h2 class="section-title fly-in">Key Features</h2>
+        <div class="features">
+            <div class="feature-box fly-in ">
+                <div class="feature-icon">💡</div>
+                <div class="feature-title fly-in">Innovation</div>
+                <p class="fly-in">We solve real-world problems using the latest technologies like AI and blockchain.</p>
+            </div>
+            <div class="feature-box fly-in">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-title fly-in">Global Reach</div>
+                <p class="fly-in">Our solutions are built for scale, helping businesses across the globe.</p>
+            </div>
+            <div class="feature-box fly-in">
+                <div class="feature-icon">⚙️</div>
+                <div class="feature-title fly-in">Automation</div>
+                <p class="fly-in">We help automate workflows to save time, cost, and human effort.</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer id="footer">
+        © 2025 Synkro. All rights reserved.
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById("nav-links");
+            const closeBtn = document.querySelector(".close-toggle");
+            nav.classList.toggle("show");
+            closeBtn.style.display = nav.classList.contains("show") ? "block" : "none";
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove("fly-in");
+                    void entry.target.offsetWidth; // Force reflow
+                    entry.target.classList.add("fly-in", "visible");
+                }
+            });
+        }, {
+            threshold: 0
+        });
+
+        document.querySelectorAll('.fly-in').forEach(el => observer.observe(el));
+    </script>
+
+
+</body>
+
+</html>
