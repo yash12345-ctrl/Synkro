@@ -19,7 +19,6 @@ jspm_packages/
 .env.test.local
 .env.production.local
 *.env
-!.env.example
 
 # Runtime & Logs
 logs/
