@@ -1,31 +1,58 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const app = express();
 const db = require('./db');
 
-const PDFDocument = require('pdfkit');
+const { generateSubmissionSlip } = require('./pdfGenerator');
 
 app.get('/download-slip', (req, res) => {
   const { name, platform, idea, budget } = req.query;
+  const safeName = (name || 'client').trim().replace(/[^a-zA-Z0-9_-]/g, '_');
 
-  const doc = new PDFDocument();
-  res.setHeader('Content-disposition', `attachment; filename="${name}_submission_slip.pdf"`);
+  res.setHeader('Content-disposition', `attachment; filename="${safeName}_submission_slip.pdf"`);
   res.setHeader('Content-type', 'application/pdf');
-  doc.pipe(res);
 
-  doc.fontSize(22).text('📄 Submission Slip', { align: 'center' });
-  doc.moveDown();
-  doc.fontSize(14).text(`Name: ${name}`);
-  doc.text(`Preferred Platform: ${platform}`);
-  doc.text(`Your Idea: ${idea}`);
-  doc.text(`Budget: ₹${budget}`);
-  doc.end();
+  try {
+    generateSubmissionSlip({ name, platform, idea, budget }, res);
+  } catch (err) {
+    console.error('Failed to generate PDF slip:', err);
+    res.status(500).send('Error generating submission slip.');
+  }
 });
 
 
+
+// Health router for Render wake-up and UptimeRobot monitoring
+const healthRouter = express.Router();
+
+const checkHealth = (req, res) => {
+  db.get('SELECT 1', (err) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'error',
+        message: 'Database check failed',
+        uptime: `${Math.floor(process.uptime())}s`,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    res.status(200).json({
+      status: 'ok',
+      service: 'Synkro Web Service',
+      uptime: `${Math.floor(process.uptime())}s`,
+      timestamp: new Date().toISOString()
+    });
+  });
+};
+
+healthRouter.get('/', checkHealth);
+healthRouter.head('/', (req, res) => res.status(200).end());
+
+app.use('/health', healthRouter);
+app.get(['/healthz', '/ping'], checkHealth);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -36,13 +63,6 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'welcome.html'));
 });
-
-
-db.run(`CREATE TABLE IF NOT EXISTS subscriptions (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  email TEXT UNIQUE NOT NULL,
-  subscribed_at DATETIME DEFAULT CURRENT_TIMESTAMP
-)`);
 
 
 app.post('/submit-email', (req, res) => {

@@ -4,742 +4,1826 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us | TechNova</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap" rel="stylesheet">
+    <title>About Us | Synkro — Driven by Innovation, Powered by Passion</title>
+    <meta name="description"
+        content="Learn about Synkro: our story, mission, team and the values behind the websites, apps and software we build for startups and businesses." />
+    <meta name="theme-color" content="#07080c" />
+    <link rel="icon" href="images/gggg.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
     <style>
-        * {
+        /* ========== Design tokens (shared with welcome.html) ========== */
+        :root {
+            --bg: #07080c;
+            --bg-2: #0b0d13;
+            --surface: rgba(255, 255, 255, 0.03);
+            --surface-2: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.14);
+            --text: #eceef3;
+            --muted: #8b90a0;
+            --dim: #5d6272;
+            --accent: #7c6cff;
+            --accent-2: #4fd1e8;
+            --accent-3: #c26bff;
+            --grad: linear-gradient(120deg, #7c6cff 0%, #c26bff 45%, #4fd1e8 100%);
+            --radius: 16px;
+            --radius-lg: 24px;
+            --container: 1180px;
+            --ease: cubic-bezier(.2, .7, .2, 1);
+            --font-head: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+        }
+
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #f9f9f9;
-            color: #1f1f1f;
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
-        header {
-            background: linear-gradient(90deg, #1f1c2c, #928dab);
-            padding: 20px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        a {
+            color: inherit;
             text-decoration: none;
         }
 
-        .logo-img {
-            width: 45px;
-            height: 45px;
-            object-fit: cover;
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .grad-text {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+        }
+
+        .bg-glow {
+            position: absolute;
+            z-index: -1;
             border-radius: 50%;
-            background-color: white;
-            padding: 4px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            filter: blur(120px);
+            opacity: .55;
+            pointer-events: none;
         }
 
-        .logo span {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #fff;
-            letter-spacing: 1px;
+        .bg-glow.one {
+            width: 620px;
+            height: 620px;
+            top: -280px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, rgba(124, 108, 255, .55), transparent 70%);
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
+        .bg-glow.two {
+            width: 420px;
+            height: 420px;
+            top: 260px;
+            left: -160px;
+            background: radial-gradient(circle, rgba(79, 209, 232, .3), transparent 70%);
         }
 
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #ffb3ec;
-        }
-
-        section {
-            padding: 60px 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .about-content,
-        .experience-cards,
-        .services-grid,
-        .trust-grid,
-        .footer-columns {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .about-text,
-        .about-img,
-        .experience-card,
-        .service-card,
-        .trust-card {
-            flex: 1 1 300px;
-        }
-
-        .about-img img,
-        .service-card img,
-        .trust-card img,
-        .review-card img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .experience-card,
-        .service-card,
-        .trust-card {
-            padding: 20px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-
-        .highlight {
-            background: #ffe9fb;
-            padding: 10px;
-            border-left: 5px solid #ff4ecd;
-            margin: 20px 0;
-        }
-
-        .footer-section {
-            background: linear-gradient(135deg, #1f1c2c, #928dab);
-            color: white;
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .footer-columns div {
-            min-width: 200px;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .social-icons img {
-            width: 30px;
-            height: 30px;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: white;
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                position: absolute;
-                top: 70px;
-                right: 20px;
-                flex-direction: column;
-                background: #1f1c2c;
-                padding: 20px;
-                border-radius: 10px;
-                display: none;
-            }
-
-            nav ul.show {
-                display: flex;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .logo span {
-                font-size: 1.2rem;
-            }
-        }
-
-        .fly-element {
-            opacity: 0;
-            transform: translateY(50px) translateX(-30px) rotate(-2deg);
-            transition: all 0.6s ease;
-        }
-
-        .fly-element.visible {
-            opacity: 1;
-            transform: translateY(0) translateX(0) rotate(0deg);
-        }
-
-        .trust-section {
-            background: #f8f8ff;
-            padding: 80px 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.8rem;
-            color: #1f1c2c;
-            animation: fadeIn 1.2s ease forwards;
-        }
-
-        .section-title p {
-            color: #555;
-            font-size: 1.1rem;
-            animation: fadeIn 1.5s ease forwards;
-        }
-
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
+        /* ========== Buttons ========== */
+        .btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 2s ease forwards;
-        }
-
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .about-text h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .about-text p {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #444;
-            margin-bottom: 20px;
-        }
-
-        .about-img {
-            flex: 1;
-            min-width: 280px;
-            text-align: center;
-        }
-
-        .about-img img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            animation: fadeInZoom 1.8s ease forwards;
-        }
-
-        .experience-section {
-            background: #fff;
-            padding: 80px 20px;
-        }
-
-        .experience-cards {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            margin-top: 40px;
-        }
-
-        .experience-card {
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            padding: 30px 25px;
-            border-radius: 20px;
-            flex: 1 1 300px;
-            max-width: 340px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-        }
-
-        .experience-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .experience-card h4 {
-            font-size: 1.3rem;
-            color: #1f1c2c;
-            margin-bottom: 10px;
+            gap: 8px;
+            height: 46px;
+            padding: 0 22px;
+            border-radius: 999px;
+            font-family: var(--font-body);
             font-weight: 600;
+            font-size: .95rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, border-color .25s;
+            white-space: nowrap;
         }
 
-        .experience-card p {
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.6;
+        .btn svg {
+            width: 16px;
+            height: 16px;
+            transition: transform .25s var(--ease);
         }
 
-        @media (max-width: 768px) {
-            .experience-section {
-                padding: 60px 15px;
-            }
-
-            .experience-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .experience-card {
-                max-width: 90%;
-                padding: 25px 20px;
-            }
-
-            .experience-card h4 {
-                font-size: 1.1rem;
-            }
-
-            .experience-card p {
-                font-size: 0.9rem;
-            }
+        .btn:hover svg {
+            transform: translateX(3px);
         }
 
-        @media (max-width: 480px) {
-            .experience-section {
-                padding: 50px 10px;
-            }
-
-            .experience-card {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-
-            .experience-card h4 {
-                font-size: 1rem;
-            }
-
-            .experience-card p {
-                font-size: 0.85rem;
-                line-height: 1.5;
-            }
+        .btn-primary {
+            background: #fff;
+            color: #0a0b10;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, .1), 0 8px 30px -8px rgba(124, 108, 255, .6);
         }
 
-        @media (max-width: 768px) {
-            .footer-columns {
-                flex-direction: column !important;
-                align-items: center !important;
-                text-align: center;
-            }
-
-            .footer-columns>div {
-                width: 100%;
-                max-width: 320px;
-            }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, .2), 0 14px 40px -8px rgba(124, 108, 255, .8);
         }
 
-        .overlay {
+        .btn-ghost {
+            background: var(--surface);
+            border-color: var(--border-strong);
+            color: var(--text);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-ghost:hover {
+            background: var(--surface-2);
+            border-color: rgba(255, 255, 255, .25);
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            height: 38px;
+            padding: 0 16px;
+            font-size: .875rem;
+        }
+
+        /* ========== Navbar ========== */
+        .nav {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 999;
+            right: 0;
+            z-index: 100;
+            transition: background .3s, border-color .3s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(7, 8, 12, .72);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border-color: var(--border);
+        }
+
+        .nav-inner {
             display: flex;
-            justify-content: center;
             align-items: center;
-            flex-direction: column;
-            transform: translateY(-100%);
-            transition: transform 0.4s ease;
+            justify-content: space-between;
+            height: 72px;
         }
 
-        .overlay.show {
-            transform: translateY(0);
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -.01em;
         }
 
-        .overlay ul {
+        .brand img {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #fff;
+            padding: 2px;
+            box-shadow: 0 0 0 1px var(--border-strong);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
             list-style: none;
+            padding: 5px;
+            border-radius: 999px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 7px 16px;
+            border-radius: 999px;
+            font-size: .9rem;
+            font-weight: 500;
+            color: var(--muted);
+            transition: color .2s, background .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: var(--surface-2);
+        }
+
+        .nav-links a[aria-current="page"] {
+            color: var(--text);
+            background: rgba(255, 255, 255, .08);
+            box-shadow: inset 0 0 0 1px var(--border-strong);
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-btn {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid var(--border-strong);
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 72px 0 auto 0;
+            z-index: 99;
+            background: rgba(7, 8, 12, .96);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transform: translateY(-12px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s var(--ease), transform .25s var(--ease);
+        }
+
+        .mobile-menu.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .mobile-menu a {
+            padding: 14px 4px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu .btn {
+            margin-top: 18px;
+        }
+
+        /* ========== Common section bits ========== */
+        section {
+            position: relative;
+            padding: 110px 0;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: .78rem;
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            color: var(--accent-2);
+            margin-bottom: 16px;
+        }
+
+        .eyebrow::before {
+            content: '';
+            width: 18px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .section-head {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 64px;
+        }
+
+        .section-head.left {
+            text-align: left;
+            margin: 0 0 40px;
+        }
+
+        .section-head h2 {
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .section-head p {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        /* ========== Hero ========== */
+        .hero {
+            padding: 160px 0 60px;
             text-align: center;
         }
 
-        .overlay ul li {
-            margin: 20px 0;
+        .crumbs {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--border-strong);
+            background: var(--surface);
+            font-size: .82rem;
+            color: var(--muted);
         }
 
-        .overlay ul li a {
-            font-size: 2rem;
-            color: #1f1c2c;
-            text-decoration: none;
+        .crumbs a:hover {
+            color: var(--text);
+        }
+
+        .crumbs svg {
+            width: 12px;
+            height: 12px;
+            opacity: .6;
+        }
+
+        .hero h1 {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: clamp(2.5rem, 6vw, 4.6rem);
+            line-height: 1.05;
+            letter-spacing: -.035em;
+            margin: 26px auto 22px;
+            max-width: 920px;
+        }
+
+        .hero-sub {
+            font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+            color: var(--muted);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* Hero image */
+        .hero-media {
+            position: relative;
+            margin: 70px auto 0;
+            max-width: 1100px;
+        }
+
+        .hero-frame {
+            position: relative;
+            border-radius: 28px;
+            padding: 8px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .02));
+            border: 1px solid var(--border);
+            box-shadow: 0 40px 120px -30px rgba(124, 108, 255, .45);
+        }
+
+        .hero-frame img {
+            width: 100%;
+            aspect-ratio: 21 / 9;
+            object-fit: cover;
+            border-radius: 22px;
+            filter: saturate(.9) contrast(1.05);
+        }
+
+        .hero-frame::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border-radius: 22px;
+            background: linear-gradient(180deg, transparent 45%, rgba(7, 8, 12, .75) 100%);
+            pointer-events: none;
+        }
+
+        .hero-caption {
+            position: absolute;
+            left: 40px;
+            bottom: 36px;
+            z-index: 2;
+            text-align: left;
+            max-width: 420px;
+        }
+
+        .hero-caption small {
+            font-family: var(--font-mono);
+            font-size: .75rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--accent-2);
+        }
+
+        .hero-caption p {
+            font-family: var(--font-head);
+            font-size: 1.25rem;
             font-weight: 600;
+            line-height: 1.35;
+            margin-top: 6px;
+        }
+
+        .float-card {
+            position: absolute;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            background: rgba(16, 18, 26, .85);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 20px 50px -15px rgba(0, 0, 0, .7);
+            text-align: left;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-card .ic {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: var(--grad);
+        }
+
+        .float-card .ic svg {
+            width: 18px;
+            height: 18px;
+            color: #fff;
+        }
+
+        .float-card b {
+            display: block;
+            font-size: .85rem;
+            font-weight: 600;
+        }
+
+        .float-card small {
+            font-size: .75rem;
+            color: var(--muted);
+        }
+
+        .float-card.tr {
+            top: -22px;
+            right: 40px;
+        }
+
+        .float-card.br {
+            right: -24px;
+            bottom: 60px;
+            animation-delay: -3s;
+        }
+
+        /* Stats strip */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: var(--surface);
+            overflow: hidden;
+            margin-top: 56px;
+            text-align: left;
+        }
+
+        .stat {
+            padding: 30px 28px;
+            border-right: 1px solid var(--border);
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat b {
+            display: block;
+            font-family: var(--font-head);
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -.03em;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        /* ========== Story ========== */
+        .story {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 72px;
+            align-items: start;
+        }
+
+        .story-text p {
+            color: var(--muted);
+            font-size: 1.06rem;
+            margin-bottom: 20px;
+        }
+
+        .story-text p strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .pull-quote {
+            position: relative;
+            margin: 34px 0;
+            padding: 6px 0 6px 26px;
+            font-family: var(--font-head);
+            font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -.015em;
+        }
+
+        .pull-quote::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            border-radius: 3px;
+            background: var(--grad);
+        }
+
+        .mv-stack {
+            display: grid;
+            gap: 16px;
+            position: sticky;
+            top: 110px;
+        }
+
+        .mv-card {
+            position: relative;
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            overflow: hidden;
+        }
+
+        .mv-card.featured {
+            background:
+                radial-gradient(500px circle at 100% 0%, rgba(124, 108, 255, .2), transparent 55%),
+                var(--bg-2);
+            border-color: var(--border-strong);
+        }
+
+        .mv-card .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--muted);
+            margin-bottom: 14px;
+        }
+
+        .mv-card .tag svg {
+            width: 16px;
+            height: 16px;
+            color: #b9b0ff;
+        }
+
+        .mv-card h3 {
+            font-family: var(--font-head);
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.35;
+            letter-spacing: -.01em;
+        }
+
+        .mv-card p {
+            color: var(--muted);
+            margin-top: 10px;
+            font-size: .95rem;
+        }
+
+        /* ========== Values (bento) ========== */
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            position: relative;
+            padding: 30px;
+            border-radius: var(--radius);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: transform .35s var(--ease), border-color .35s;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 0%), rgba(124, 108, 255, .14), transparent 45%);
+            opacity: 0;
+            transition: opacity .35s;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .bento .card {
+            grid-column: span 2;
+        }
+
+        .bento .card.wide {
+            grid-column: span 3;
+        }
+
+        .card-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(124, 108, 255, .18), rgba(79, 209, 232, .1));
+            border: 1px solid rgba(124, 108, 255, .3);
+            margin-bottom: 22px;
+        }
+
+        .card-icon svg {
+            width: 22px;
+            height: 22px;
+            color: #b9b0ff;
+        }
+
+        .card h3 {
+            font-family: var(--font-head);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: -.01em;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: .94rem;
+        }
+
+        .card .big {
+            font-family: var(--font-head);
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -.04em;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        /* ========== Services with imagery ========== */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .svc {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-2);
+            min-height: 360px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            isolation: isolate;
+            transition: transform .4s var(--ease), border-color .4s;
+        }
+
+        .svc img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: grayscale(.35) brightness(.75);
+            transform: scale(1.02);
+            transition: transform .8s var(--ease), filter .5s;
+        }
+
+        .svc::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(180deg, rgba(7, 8, 12, .1) 0%, rgba(7, 8, 12, .55) 45%, rgba(7, 8, 12, .96) 100%);
+        }
+
+        .svc:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+        }
+
+        .svc:hover img {
+            transform: scale(1.08);
+            filter: grayscale(0) brightness(.85);
+        }
+
+        .svc-body {
+            padding: 28px;
+        }
+
+        .svc-num {
+            position: absolute;
+            top: 22px;
+            left: 24px;
+            font-family: var(--font-mono);
+            font-size: .78rem;
+            color: var(--text);
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(7, 8, 12, .55);
+            border: 1px solid var(--border-strong);
+            backdrop-filter: blur(6px);
+        }
+
+        .svc h3 {
+            font-family: var(--font-head);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -.01em;
+        }
+
+        .svc p {
+            color: #b4b8c5;
+            font-size: .94rem;
+        }
+
+        .center-cta {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+        }
+
+        /* ========== Team experience ========== */
+        .team {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .member {
+            display: flex;
+            flex-direction: column;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            overflow: hidden;
+            transition: transform .35s var(--ease), border-color .35s;
+        }
+
+        .member:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+        }
+
+        .member-photo {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 22%;
+            transition: transform .8s var(--ease);
+        }
+
+        .member:hover .member-photo img {
+            transform: scale(1.05);
+        }
+
+        .member-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 55%, rgba(7, 8, 12, .85));
+        }
+
+        .member-role {
+            position: absolute;
+            left: 20px;
+            bottom: 16px;
+            z-index: 1;
+            font-size: .75rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(124, 108, 255, .22);
+            border: 1px solid rgba(124, 108, 255, .45);
+            backdrop-filter: blur(6px);
+        }
+
+        .member-body {
+            padding: 24px 26px 28px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .member-body h3 {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .member-body p {
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        /* ========== Reviews ========== */
+        .reviews {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .review {
+            display: flex;
+            flex-direction: column;
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .01));
+            transition: transform .35s var(--ease), border-color .35s;
+        }
+
+        .review:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+        }
+
+        .review.featured {
+            background:
+                radial-gradient(500px circle at 0% 0%, rgba(124, 108, 255, .18), transparent 55%),
+                var(--bg-2);
+            border-color: var(--border-strong);
+        }
+
+        .stars {
+            display: flex;
+            gap: 3px;
+            color: #fbbf24;
+            margin-bottom: 20px;
+        }
+
+        .stars svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .review blockquote {
+            font-size: 1.04rem;
+            line-height: 1.65;
+            color: #d3d6df;
+            flex: 1;
+            margin-bottom: 28px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border);
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-family: var(--font-head);
+            font-weight: 700;
+            color: #fff;
+            background: var(--grad);
+            flex-shrink: 0;
+        }
+
+        .avatar.b {
+            background: linear-gradient(135deg, #4fd1e8, #7c6cff);
+        }
+
+        .avatar.c {
+            background: linear-gradient(135deg, #c26bff, #ff7ab6);
+        }
+
+        .author b {
+            display: block;
+            font-weight: 600;
+        }
+
+        .author span {
+            font-size: .86rem;
+            color: var(--muted);
+        }
+
+        /* ========== CTA ========== */
+        .cta {
+            position: relative;
+            padding: 80px 40px;
+            border-radius: 32px;
+            text-align: center;
+            overflow: hidden;
+            border: 1px solid var(--border-strong);
+            background:
+                radial-gradient(700px circle at 50% 120%, rgba(124, 108, 255, .45), transparent 60%),
+                radial-gradient(500px circle at 90% -20%, rgba(79, 209, 232, .25), transparent 60%),
+                var(--bg-2);
+        }
+
+        .cta::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .cta>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 4.4vw, 3.4rem);
+            font-weight: 800;
+            letter-spacing: -.035em;
+            line-height: 1.08;
+            max-width: 760px;
+            margin: 0 auto 18px;
+        }
+
+        .cta p {
+            color: var(--muted);
+            font-size: 1.08rem;
+            max-width: 540px;
+            margin: 0 auto 34px;
+        }
+
+        .cta .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ========== Footer ========== */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 64px 0 36px;
+            margin-top: 40px;
+        }
+
+        .foot-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            margin-bottom: 56px;
+        }
+
+        .foot-brand p {
+            color: var(--muted);
+            font-size: .92rem;
+            margin-top: 16px;
+            max-width: 300px;
+        }
+
+        .socials {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .socials a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border-strong);
+            background: var(--surface);
+            color: var(--muted);
+            transition: color .2s, border-color .2s, transform .2s;
+        }
+
+        .socials a:hover {
+            color: var(--text);
+            border-color: rgba(124, 108, 255, .6);
+            transform: translateY(-2px);
+        }
+
+        .socials svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .foot-col h4 {
+            font-size: .82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--dim);
+            margin-bottom: 16px;
+        }
+
+        .foot-col ul {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .foot-col a,
+        .foot-col li {
+            color: var(--muted);
+            font-size: .93rem;
+            transition: color .2s;
+        }
+
+        .foot-col a:hover {
+            color: var(--text);
+        }
+
+        .contact-li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-li svg {
+            width: 15px;
+            height: 15px;
+            color: var(--accent-2);
+            flex-shrink: 0;
+        }
+
+        .foot-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+            color: var(--dim);
+            font-size: .86rem;
+            flex-wrap: wrap;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28c840;
+            box-shadow: 0 0 10px #28c840;
+        }
+
+        /* ========== Animations ========== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .8s var(--ease), transform .8s var(--ease);
+            transition-delay: var(--d, 0s);
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 1080px) {
+            .float-card.br { right: 10px; }
+        }
+
+        @media (max-width: 960px) {
+            .story { grid-template-columns: 1fr; gap: 48px; }
+            .mv-stack { position: static; }
+            .bento { grid-template-columns: repeat(2, 1fr); }
+            .bento .card, .bento .card.wide { grid-column: span 1; }
+            .bento .card.wide:first-child { grid-column: span 2; }
+            .services, .team, .reviews { grid-template-columns: repeat(2, 1fr); }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .stat:nth-child(2) { border-right: none; }
+            .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+            .foot-grid { grid-template-columns: 1fr 1fr; }
+            .hero-frame img { aspect-ratio: 16 / 9; }
+        }
+
+        @media (max-width: 820px) {
+            .nav-links,
+            .nav-cta .btn-ghost,
+            .nav-cta .btn-primary {
+                display: none;
+            }
+
+            .menu-btn {
+                display: inline-flex;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 130px 0 40px; }
+            section { padding: 80px 0; }
+            .float-card { display: none; }
+            .hero-caption { left: 22px; right: 22px; bottom: 20px; }
+            .hero-caption p { font-size: 1rem; }
+            .hero-frame img { aspect-ratio: 4 / 3; }
+            .bento { grid-template-columns: 1fr; }
+            .bento .card.wide:first-child { grid-column: span 1; }
+            .services, .team, .reviews { grid-template-columns: 1fr; }
+            .svc { min-height: 300px; }
+            .cta { padding: 60px 22px; border-radius: 24px; }
+            .foot-grid { grid-template-columns: 1fr; }
+            .cta .actions .btn, .center-cta .btn { width: 100%; }
         }
     </style>
 </head>
 
 <body>
+    <div class="bg-grid" aria-hidden="true"></div>
 
-    <header>
-        <div class="logo">
-            <img src="images/gggg.jpg" class="logo-img" alt="Synkro Logo">
-            <span>Synkro</span>
-        </div>
-        <nav>
-            <ul id="navLinks">
-                <li><a href="about.html">Home</a></li>
-                <li><a href="solution.html">Solutions</a></li>
-                <li><a href="team.html">Team</a></li>
-                <li><a href="customer1.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- ===== Navigation ===== -->
+    <header class="nav" id="nav">
+        <div class="container nav-inner">
+            <a href="welcome.html" class="brand" id="nav-brand">
+                <img src="images/gggg.jpg" alt="Synkro logo" />
+                Synkro
+            </a>
+
+            <nav aria-label="Primary">
+                <ul class="nav-links">
+                    <li><a href="welcome.html" id="nav-home">Home</a></li>
+                    <li><a href="about.html" id="nav-about" aria-current="page">About</a></li>
+                    <li><a href="solution.html" id="nav-solutions">Solutions</a></li>
+                    <li><a href="team.html" id="nav-team">Team</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-cta">
+                <a href="customer1.html" class="btn btn-ghost btn-sm" id="nav-contact">Contact</a>
+                <a href="booking.html" class="btn btn-primary btn-sm" id="nav-book">Book a call</a>
+                <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false"
+                    aria-controls="mobile-menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path id="menu-icon" d="M4 7h16M4 12h16M4 17h16" />
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
-    <div id="overlayMenu" class="overlay">
-        <ul>
-            <li><a href="about.html">Home</a></li>
-            <li><a href="solution.html">Solutions</a></li>
-            <li><a href="team.html">Team</a></li>
-            <li><a href="customer1.html">Contact</a></li>
-        </ul>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="welcome.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="solution.html">Solutions</a>
+        <a href="team.html">Team</a>
+        <a href="customer1.html">Contact</a>
+        <a href="booking.html" class="btn btn-primary" id="mobile-book">Book a free call</a>
     </div>
 
+    <main>
+        <!-- ===== Hero ===== -->
+        <section class="hero" id="top">
+            <div class="bg-glow one" aria-hidden="true"></div>
+            <div class="bg-glow two" aria-hidden="true"></div>
 
-    <section>
-        <div class="section-title fly-element">
-            <h2>About Our Startup</h2>
-            <p>Driven by Innovation. Powered by Passion.</p>
-        </div>
-
-        <div class="about-content">
-            <div class="about-text fly-element">
-                <h3>Our Journey</h3>
-                <p>At SYNKRO, we believe that every mind is a powerhouse of ideas — waiting to take shape, solve
-                    problems, and drive change. But ideas alone are not enough; what truly matters is turning those
-                    ideas into reality. That’s where we come in.
-                    Our mission is simple yet powerful: to bring your ideas into sync with the digital world. We help
-                    individuals, startups, and businesses transform raw thoughts into functional, impactful, and
-                    scalable digital solutions.
-
-                </p>
-
-                <div class="highlight fly-element">
-                    We believe in building products that are not only beautiful but also meaningful.
+            <div class="container">
+                <div class="crumbs reveal">
+                    <a href="welcome.html">Home</a>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
+                    <span>About us</span>
                 </div>
 
-                <p>
-                    From design to deployment, we focus on building scalable, secure, and user-friendly software.
-                    Whether you're launching a new app, a portfolio, or a full platform — TechNova has you covered.
+                <h1 class="reveal" style="--d:.08s">
+                    Driven by innovation.<br /><span class="grad-text">Powered by passion.</span>
+                </h1>
+
+                <p class="hero-sub reveal" style="--d:.16s">
+                    We're a digital studio on a simple mission — to bring your ideas into sync with the digital
+                    world, and turn raw thoughts into products that are functional, impactful and built to scale.
                 </p>
+
+                <div class="hero-media reveal" style="--d:.26s">
+                    <div class="float-card tr">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg></div>
+                        <div><b>20+ happy clients</b><small>Startups, enterprises &amp; creators</small></div>
+                    </div>
+                    <div class="float-card br">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg></div>
+                        <div><b>Based in Chennai, India</b><small>Working with clients globally</small></div>
+                    </div>
+
+                    <div class="hero-frame">
+                        <img src="images/image 1.webp" alt="The Synkro team collaborating in a studio session" />
+                        <div class="hero-caption">
+                            <small>Our belief</small>
+                            <p>Every mind is a powerhouse of ideas — waiting to take shape.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats reveal">
+                    <div class="stat"><b class="grad-text" data-count="20" data-suffix="+">0</b><span>Clients
+                            trusted us</span></div>
+                    <div class="stat"><b data-count="6">0</b><span>Core services offered</span></div>
+                    <div class="stat"><b data-count="24" data-suffix="/7">0</b><span>Support whenever you need
+                            it</span></div>
+                    <div class="stat"><b data-count="100" data-suffix="%">0</b><span>Focus on quality &amp;
+                            security</span></div>
+                </div>
             </div>
+        </section>
 
-            <div class="about-img fly-element">
-                <img src="images/image 1.webp" alt="Startup Team">
-            </div>
-        </div>
-    </section>
-
-
-
-    <section class="experience-section">
-        <div class="section-title fly-element">
-            <h2>Team Members' Experience</h2>
-            <p>Real stories from those who built it with us.</p>
-        </div>
-
-        <div class="experience-cards">
-            <div class="card experience-card fly-element">
-                <h4>Yash Tomar</h4>
-                <p>
-                    Working with TechNova was a transformative experience. I honed my full-stack skills and contributed
-                    to several live products. The culture is very collaborative and inspiring.
-                </p>
-            </div>
-            <div class="card experience-card fly-element">
-                <h4>Devansh Shishodia</h4>
-                <p>
-                    As a UI/UX designer, I had the opportunity to bring ideas to life. The team pushed me creatively
-                    while respecting my vision — that balance helped me grow fast.
-                </p>
-            </div>
-            <div class="card experience-card fly-element">
-                <h4>Khushi Shishodia</h4>
-                <p>
-                    I managed client interactions and product delivery. It was hands-on, fast-paced, and exactly the
-                    kind of experience I needed to grow into a professional project lead.
-                </p>
-            </div>
-        </div>
-    </section>
-
-
-
-
-    <section class="what-we-do-section">
-        <div class="section-title fly-element">
-            <h2>What We Do</h2>
-            <p>Turning your ideas into real-world digital solutions</p>
-        </div>
-
-        <div class="services-grid">
-            <div class="service-card fly-element">
-                <img src="images/website-development-links-seo-webinar-cyberspace-concept_53876-120953.avif"
-                    alt="Web Development">
-                <h4>Website Development</h4>
-                <p>Custom websites with stunning designs and smooth performance, tailored to your brand.</p>
-            </div>
-
-            <div class="service-card fly-element">
-                <img src="images/mobile-application-development-lifecycle-5-key-phases.jpg" alt="App Development">
-                <h4>Mobile App Development</h4>
-                <p>High-quality Android & iOS apps built for performance and user experience.</p>
-            </div>
-
-            <div class="service-card fly-element">
-                <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=800&q=80"
-                    alt="UI/UX Design">
-                <h4>UI/UX Design</h4>
-                <p>Modern, engaging, and intuitive user interfaces that enhance user satisfaction.</p>
-            </div>
-
-            <div class="service-card fly-element">
-                <img src="images/images.jpeg" alt="Software Development">
-                <h4>Software Development</h4>
-                <p>Robust desktop and backend systems tailored to your organizational needs.</p>
-            </div>
-
-            <div class="service-card fly-element">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80"
-                    alt="MVP Development">
-                <h4>MVP Development</h4>
-                <p>Build and test Minimum Viable Products quickly to validate your business ideas.</p>
-            </div>
-
-            <div class="service-card fly-element">
-                <img src="images/Top-10-Career-Opportunities-in-Fashion-Designing.jpg" alt="Designing">
-                <h4>Designing</h4>
-                <p>Creative visual designs, branding assets, and graphics to make your brand stand out.</p>
-            </div>
-        </div>
-
-
-        <div style="text-align: center; margin-top: 50px;">
-            <a href="customer1.html" style="
-      background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-      color: #fff;
-      padding: 14px 28px;
-      font-size: 1.1rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-    ">
-                Get Free Consult →
-            </a>
-        </div>
-    </section>
-
-
-    <section class="reviews-section">
-        <div class="section-title fly-element">
-            <h2>What Our Partners Say</h2>
-            <p>Feedback from those who've worked with us</p>
-        </div>
-
-        <div class="reviews-grid">
-            <div class="review-card fly-element">
-                <img src="images/4042171.png" alt="John" class="avatar" />
-                <h4>Saksham</h4>
-                <span class="designation">Software Development Head</span>
-                <p>
-                    Synkro's dedication to quality and innovation is unmatched. They delivered our platform ahead of
-                    schedule
-                    and beyond expectations.
-                </p>
-            </div>
-
-            <div class="review-card fly-element">
-                <img src="images/4042171.png" alt="Priya" class="avatar" />
-                <h4>Yash</h4>
-                <span class="designation">UI/UX Development Head</span>
-                <p>
-                    Their UI/UX team has a keen sense of modern design. The collaboration felt natural and results were
-                    visually
-                    stunning.
-                </p>
-            </div>
-
-            <div class="review-card fly-element">
-                <img src="images/4042171.png" alt="Aditya" class="avatar" />
-                <h4>Rahul</h4>
-                <span class="designation"></span>
-                <p>
-                    Synkro brings a startup-friendly mindset while maintaining enterprise-grade execution. They're our
-                    go-to dev
-                    partner now.
-                </p>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="trust-section">
-        <div class="section-title fly-element">
-            <h2>Why Trust Synkro?</h2>
-            <p>Built on values, proven by results</p>
-        </div>
-
-        <div class="trust-grid">
-            <div class="trust-card fly-element">
-                <img src="https://img.icons8.com/fluency/48/shield.png" alt="Secure">
-                <h4>Top-Notch Security</h4>
-                <p>Your data and projects are protected with enterprise-grade encryption and protocols.</p>
-            </div>
-            <div class="trust-card fly-element">
-                <img src="https://img.icons8.com/fluency/48/customer-support.png" alt="Support">
-                <h4>24/7 Support</h4>
-                <p>We’re always available — day or night — to support your vision and needs.</p>
-            </div>
-            <div class="trust-card fly-element">
-                <img src="https://img.icons8.com/fluency/48/checked--v1.png" alt="Quality">
-                <h4>Uncompromised Quality</h4>
-                <p>We combine aesthetics and performance to deliver flawless products that stand out.</p>
-            </div>
-            <div class="trust-card fly-element">
-                <img src="https://img.icons8.com/fluency/48/handshake.png" alt="Clients">
-                <h4>Trusted by 20+ Clients</h4>
-                <p>We’ve worked with startups, enterprises, and creators across the globe.</p>
-            </div>
-            <div class="trust-card fly-element">
-                <img src="https://img.icons8.com/fluency/48/laptop-coding.png" alt="Experience">
-                <h4>Experienced Team</h4>
-                <p>Our developers, designers, and strategists bring years of industry expertise.</p>
-            </div>
-        </div>
-    </section>
-
-
-
-    <section class="footer-section">
-        <div class="footer-wave"></div>
-        <div class="footer-container">
-            <h2>Let's build the future, together.</h2>
-            <p>Got an idea or need help with a project? We’d love to collaborate with you.</p>
-            <a class="footer-btn"> in Touch</a>
-
-            <div class="footer-columns"
-                style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 60px; gap: 40px;">
-                <div style="flex: 1; min-width: 220px;">
-                    <h4 style="color: #fff; margin-bottom: 15px;">About</h4>
-                    <p style="color: #ccc; line-height: 1.7;">
-                        Synkro is a forward-thinking digital studio crafting exceptional digital products that help
-                        companies
-                        grow, evolve, and transform.
+        <!-- ===== Our Story ===== -->
+        <section id="story">
+            <div class="container story">
+                <div class="story-text">
+                    <div class="section-head left">
+                        <div class="eyebrow reveal">Our journey</div>
+                        <h2 class="reveal" style="--d:.06s">Ideas are just the beginning.</h2>
+                    </div>
+                    <p class="reveal">
+                        At <strong>Synkro</strong>, we believe that every mind is a powerhouse of ideas — waiting to
+                        take shape, solve problems, and drive change. But ideas alone are not enough; what truly
+                        matters is turning those ideas into reality. <strong>That's where we come in.</strong>
+                    </p>
+                    <p class="reveal">
+                        We help individuals, startups, and businesses transform raw thoughts into functional,
+                        impactful, and scalable digital solutions.
+                    </p>
+                    <blockquote class="pull-quote reveal">
+                        We believe in building products that are not only <span class="grad-text">beautiful</span>,
+                        but also <span class="grad-text">meaningful</span>.
+                    </blockquote>
+                    <p class="reveal">
+                        From design to deployment, we focus on building scalable, secure, and user-friendly
+                        software. Whether you're launching a new app, a portfolio, or a full platform — Synkro has
+                        you covered.
                     </p>
                 </div>
 
-                <div style="flex: 1; min-width: 160px;">
-                    <h4 style="color: #fff; margin-bottom: 15px;">Explore</h4>
-                    <p>Home</p>
-                    <p>Solutions</p>
-
-                    <p>Team</p>
-
-                    <p>Careers</p>
-                </div>
-
-                <div style="flex: 1; min-width: 160px;">
-                    <h4 style="color: #fff; margin-bottom: 15px;">Services</h4>
-                    <p>Web Development</p>
-                    <p>Mobile Apps</p>
-                    <p>UI/UX Design</p>
-                    <p>Software Solutions</p>
-                </div>
-
-                <div style="flex: 1; min-width: 200px;">
-                    <h4 style="color: #fff; margin-bottom: 15px;">Contact</h4>
-                    <p>Email: yashtoma12345y</p>
-                    <p>Phone: +91 8375007604</p>
-                    <p>Chennai, India</p>
+                <div class="mv-stack">
+                    <article class="mv-card featured reveal">
+                        <div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <circle cx="12" cy="12" r="6" />
+                                <circle cx="12" cy="12" r="2" />
+                            </svg>Our mission</div>
+                        <h3>To bring your ideas into sync with the digital world.</h3>
+                        <p>Simple yet powerful — we turn concepts into working products you can launch, test and
+                            grow.</p>
+                    </article>
+                    <article class="mv-card reveal" style="--d:.08s">
+                        <div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>Our vision</div>
+                        <h3>A forward-thinking studio helping companies grow, evolve and transform.</h3>
+                        <p>Crafting exceptional digital products for startups, enterprises and creators across the
+                            globe.</p>
+                    </article>
                 </div>
             </div>
+        </section>
 
-            <div class="social-icons" style="margin-top: 40px;">
-                <a href="#"><img src="https://img.icons8.com/fluency/48/linkedin.png" alt="LinkedIn" /></a>
-                <a href="#"><img src="https://img.icons8.com/fluency/48/github.png" alt="GitHub" /></a>
-                <a href="#"><img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram" /></a>
-                <a href="#"><img src="https://img.icons8.com/fluency/48/twitter.png" alt="Twitter" /></a>
+        <!-- ===== Why Trust Synkro ===== -->
+        <section id="values" style="padding-top:40px">
+            <div class="container">
+                <div class="section-head">
+                    <div class="eyebrow reveal">Why trust Synkro</div>
+                    <h2 class="reveal" style="--d:.06s">Built on values,<br />proven by results.</h2>
+                    <p class="reveal" style="--d:.12s">The principles that guide every line of code and every pixel we
+                        ship.</p>
+                </div>
+
+                <div class="bento">
+                    <article class="card wide reveal">
+                        <div class="big grad-text">20+</div>
+                        <h3>Trusted by clients worldwide</h3>
+                        <p>We've worked with startups, enterprises, and creators across the globe — and many of them
+                            keep coming back.</p>
+                    </article>
+                    <article class="card wide reveal" style="--d:.06s">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg></div>
+                        <h3>Top-notch security</h3>
+                        <p>Your data and projects are protected with enterprise-grade encryption and protocols.</p>
+                    </article>
+                    <article class="card reveal">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                                <path
+                                    d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                            </svg></div>
+                        <h3>24/7 support</h3>
+                        <p>We're always available — day or night — to support your vision and needs.</p>
+                    </article>
+                    <article class="card reveal" style="--d:.06s">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="6" />
+                                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                            </svg></div>
+                        <h3>Uncompromised quality</h3>
+                        <p>We combine aesthetics and performance to deliver flawless products that stand out.</p>
+                    </article>
+                    <article class="card reveal" style="--d:.12s">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="14" rx="2" />
+                                <path d="M2 20h20M9 9l-2 2 2 2M15 9l2 2-2 2" />
+                            </svg></div>
+                        <h3>Experienced team</h3>
+                        <p>Our developers, designers, and strategists bring years of industry expertise.</p>
+                    </article>
+                </div>
             </div>
+        </section>
 
-            <hr style="margin: 50px auto 20px; width: 80%; border-color: rgba(255, 255, 255, 0.2);" />
-            <p class="copyright">© 2025 Synkro. All rights reserved.</p>
+        <!-- ===== What We Do ===== -->
+        <section id="services">
+            <div class="container">
+                <div class="section-head">
+                    <div class="eyebrow reveal">What we do</div>
+                    <h2 class="reveal" style="--d:.06s">Turning ideas into<br />real-world digital solutions.</h2>
+                    <p class="reveal" style="--d:.12s">Six disciplines, one team — everything you need to go from
+                        concept to launch.</p>
+                </div>
+
+                <div class="services">
+                    <article class="svc reveal">
+                        <img src="images/website-development-links-seo-webinar-cyberspace-concept_53876-120953.avif"
+                            alt="Website development" loading="lazy" />
+                        <span class="svc-num">01</span>
+                        <div class="svc-body">
+                            <h3>Website Development</h3>
+                            <p>Custom websites with stunning designs and smooth performance, tailored to your brand.</p>
+                        </div>
+                    </article>
+                    <article class="svc reveal" style="--d:.06s">
+                        <img src="images/mobile-application-development-lifecycle-5-key-phases.jpg"
+                            alt="Mobile app development" loading="lazy" />
+                        <span class="svc-num">02</span>
+                        <div class="svc-body">
+                            <h3>Mobile App Development</h3>
+                            <p>High-quality Android &amp; iOS apps built for performance and user experience.</p>
+                        </div>
+                    </article>
+                    <article class="svc reveal" style="--d:.12s">
+                        <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=800&q=80"
+                            alt="UI/UX design" loading="lazy" />
+                        <span class="svc-num">03</span>
+                        <div class="svc-body">
+                            <h3>UI/UX Design</h3>
+                            <p>Modern, engaging, and intuitive user interfaces that enhance user satisfaction.</p>
+                        </div>
+                    </article>
+                    <article class="svc reveal">
+                        <img src="images/images.jpeg" alt="Software development" loading="lazy" />
+                        <span class="svc-num">04</span>
+                        <div class="svc-body">
+                            <h3>Software Development</h3>
+                            <p>Robust desktop and backend systems tailored to your organizational needs.</p>
+                        </div>
+                    </article>
+                    <article class="svc reveal" style="--d:.06s">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80"
+                            alt="MVP development" loading="lazy" />
+                        <span class="svc-num">05</span>
+                        <div class="svc-body">
+                            <h3>MVP Development</h3>
+                            <p>Build and test Minimum Viable Products quickly to validate your business ideas.</p>
+                        </div>
+                    </article>
+                    <article class="svc reveal" style="--d:.12s">
+                        <img src="images/Top-10-Career-Opportunities-in-Fashion-Designing.jpg" alt="Design and branding"
+                            loading="lazy" />
+                        <span class="svc-num">06</span>
+                        <div class="svc-body">
+                            <h3>Designing</h3>
+                            <p>Creative visual designs, branding assets, and graphics to make your brand stand out.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="center-cta reveal">
+                    <a href="customer1.html" class="btn btn-primary" id="services-consult">
+                        Get a free consult
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </a>
+                    <a href="solution.html" class="btn btn-ghost" id="services-all">Explore solutions</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Team Experience ===== -->
+        <section id="team">
+            <div class="container">
+                <div class="section-head">
+                    <div class="eyebrow reveal">The people</div>
+                    <h2 class="reveal" style="--d:.06s">Team members' experience.</h2>
+                    <p class="reveal" style="--d:.12s">Real stories from those who built it with us.</p>
+                </div>
+
+                <div class="team">
+                    <article class="member reveal">
+                        <div class="member-photo">
+                            <img src="images/dddddd.jpg" alt="Yash Tomar" loading="lazy" />
+                            <span class="member-role">Full-Stack Developer</span>
+                        </div>
+                        <div class="member-body">
+                            <h3>Yash Tomar</h3>
+                            <p>"Working with Synkro was a transformative experience. I honed my full-stack skills and
+                                contributed to several live products. The culture is very collaborative and
+                                inspiring."</p>
+                        </div>
+                    </article>
+                    <article class="member reveal" style="--d:.08s">
+                        <div class="member-photo">
+                            <img src="images/ishu.jpg" alt="Devansh Shishodia" loading="lazy" />
+                            <span class="member-role">UI/UX Designer</span>
+                        </div>
+                        <div class="member-body">
+                            <h3>Devansh Shishodia</h3>
+                            <p>"As a UI/UX designer, I had the opportunity to bring ideas to life. The team pushed me
+                                creatively while respecting my vision — that balance helped me grow fast."</p>
+                        </div>
+                    </article>
+                    <article class="member reveal" style="--d:.16s">
+                        <div class="member-photo">
+                            <img src="images/heyy.jpg" alt="Khushi Shishodia" loading="lazy" />
+                            <span class="member-role">Project Lead</span>
+                        </div>
+                        <div class="member-body">
+                            <h3>Khushi Shishodia</h3>
+                            <p>"I managed client interactions and product delivery. It was hands-on, fast-paced, and
+                                exactly the kind of experience I needed to grow into a professional project lead."</p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="center-cta reveal">
+                    <a href="team.html" class="btn btn-ghost" id="team-meet">
+                        Meet the full team
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Partner Reviews ===== -->
+        <section id="reviews" style="padding-top:40px">
+            <div class="container">
+                <div class="section-head">
+                    <div class="eyebrow reveal">Testimonials</div>
+                    <h2 class="reveal" style="--d:.06s">What our partners say.</h2>
+                    <p class="reveal" style="--d:.12s">Feedback from those who've worked with us.</p>
+                </div>
+
+                <div class="reviews">
+                    <figure class="review reveal">
+                        <div class="stars" aria-label="5 out of 5 stars">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                        </div>
+                        <blockquote>"Synkro's dedication to quality and innovation is unmatched. They delivered our
+                            platform ahead of schedule and beyond expectations."</blockquote>
+                        <figcaption class="author">
+                            <div class="avatar">S</div>
+                            <div><b>Saksham</b><span>Software Development Head</span></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="review featured reveal" style="--d:.08s">
+                        <div class="stars" aria-label="5 out of 5 stars">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                        </div>
+                        <blockquote>"Their UI/UX team has a keen sense of modern design. The collaboration felt natural
+                            and results were visually stunning."</blockquote>
+                        <figcaption class="author">
+                            <div class="avatar b">Y</div>
+                            <div><b>Yash</b><span>UI/UX Development Head</span></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="review reveal" style="--d:.16s">
+                        <div class="stars" aria-label="5 out of 5 stars">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" /></svg>
+                        </div>
+                        <blockquote>"Synkro brings a startup-friendly mindset while maintaining enterprise-grade
+                            execution. They're our go-to dev partner now."</blockquote>
+                        <figcaption class="author">
+                            <div class="avatar c">R</div>
+                            <div><b>Rahul</b><span>Partner</span></div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section id="cta" style="padding-top:40px">
+            <div class="container">
+                <div class="cta reveal">
+                    <div class="eyebrow" style="justify-content:center">Let's talk</div>
+                    <h2>Let's build the future, together.</h2>
+                    <p>Got an idea or need help with a project? We'd love to collaborate with you.</p>
+                    <div class="actions">
+                        <a href="customer1.html" class="btn btn-primary" id="cta-contact">
+                            Get in touch
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                        </a>
+                        <a href="booking.html" class="btn btn-ghost" id="cta-book">Book a video call</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer id="footer">
+        <div class="container">
+            <div class="foot-grid">
+                <div class="foot-brand">
+                    <a href="welcome.html" class="brand">
+                        <img src="images/gggg.jpg" alt="" />
+                        Synkro
+                    </a>
+                    <p>A forward-thinking digital studio crafting exceptional digital products that help companies
+                        grow, evolve, and transform.</p>
+                    <div class="socials">
+                        <a href="#" aria-label="LinkedIn" id="social-linkedin"><svg viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+                            </svg></a>
+                        <a href="#" aria-label="GitHub" id="social-github"><svg viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3" />
+                            </svg></a>
+                        <a href="#" aria-label="Instagram" id="social-instagram"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01" />
+                            </svg></a>
+                        <a href="#" aria-label="X (Twitter)" id="social-x"><svg viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z" />
+                            </svg></a>
+                    </div>
+                </div>
+                <div class="foot-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="welcome.html">Home</a></li>
+                        <li><a href="solution.html">Solutions</a></li>
+                        <li><a href="team.html">Team</a></li>
+                        <li><a href="customer1.html">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="solution.html">Web Development</a></li>
+                        <li><a href="solution.html">Mobile Apps</a></li>
+                        <li><a href="solution.html">UI/UX Design</a></li>
+                        <li><a href="solution.html">Software Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li class="contact-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="m22 7-10 6L2 7" />
+                            </svg><a href="mailto:yashtoma12345y@gmail.com">yashtoma12345y@gmail.com</a></li>
+                        <li class="contact-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg><a href="tel:+918375007604">+91 83750 07604</a></li>
+                        <li class="contact-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>Chennai, India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="foot-bottom">
+                <span>© <span id="year">2025</span> Synkro. All rights reserved.</span>
+                <span class="status">Currently accepting new projects</span>
+            </div>
         </div>
-    </section>
-
-
-
-
+    </footer>
 
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                } else {
-                    entry.target.classList.remove("visible");
+        // Navbar background on scroll
+        const nav = document.getElementById('nav');
+        const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 10);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        // Mobile menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const setMenu = (open) => {
+            mobileMenu.classList.toggle('open', open);
+            menuBtn.setAttribute('aria-expanded', open);
+            menuIcon.setAttribute('d', open ? 'M6 6l12 12M18 6 6 18' : 'M4 7h16M4 12h16M4 17h16');
+            if (open) nav.classList.add('scrolled'); else onScroll();
+        };
+        menuBtn.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+        // Scroll reveal
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('in');
+                    io.unobserve(e.target);
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-        const flyElements = document.querySelectorAll(".experience-card, .fly-element");
+        // Count-up stats
+        const countIO = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el = e.target;
+                const target = +el.dataset.count;
+                const suffix = el.dataset.suffix || '';
+                const start = performance.now();
+                const dur = 1400;
+                const tick = (now) => {
+                    const p = Math.min((now - start) / dur, 1);
+                    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+                countIO.unobserve(el);
+            });
+        }, { threshold: 0.6 });
+        document.querySelectorAll('[data-count]').forEach(c => countIO.observe(c));
 
-        flyElements.forEach((el, index) => {
-            el.style.transitionDelay = `${index * 0.05}s`;
-            observer.observe(el);
+        // Spotlight hover on cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('pointermove', (ev) => {
+                const r = card.getBoundingClientRect();
+                card.style.setProperty('--mx', `${ev.clientX - r.left}px`);
+                card.style.setProperty('--my', `${ev.clientY - r.top}px`);
+            });
         });
 
-        function toggleMenu() {
-            document.getElementById('overlayMenu').classList.toggle('show');
-        }
+        // Footer year
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
-
-
 </body>
 
 </html>
